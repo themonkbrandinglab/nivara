@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>NIVARA — Reflect. Align. Become.</title>
   
   <!-- Tailwind CSS CDN -->
@@ -19,6 +19,14 @@
   <script>
     tailwind.config = {
       theme: {
+        screens: {
+          'xs': '420px',
+          'sm': '640px',
+          'md': '768px',
+          'lg': '1024px',
+          'xl': '1280px',
+          '2xl': '1536px'
+        },
         extend: {
           colors: {
             ivory: {
@@ -59,10 +67,24 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
     }
 
-    /* Subtle custom selection */
     ::selection {
       background-color: #783222;
       color: #FAF7F2;
+    }
+
+    /* Fluid responsive font scales */
+    .hero-title {
+      font-size: clamp(2.35rem, 7.5vw, 5.5rem);
+      line-height: 1.1;
+    }
+    
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      line-height: 1.15;
+    }
+
+    .large-display-number {
+      font-size: clamp(4.5rem, 16vw, 9.5rem);
     }
 
     /* Custom scrollbar */
@@ -81,24 +103,23 @@
     }
   </style>
 </head>
-<body class="bg-ivory text-charcoal font-sans antialiased selection:bg-terracotta selection:text-ivory relative film-grain overflow-x-hidden">
+<body class="bg-ivory text-charcoal font-sans antialiased selection:bg-terracotta selection:text-ivory relative film-grain overflow-x-hidden w-full">
 
-  <!-- ==================== TOP FLOATING 11:11 TIME TICKER ==================== -->
-  <div class="fixed bottom-6 right-6 z-40 bg-charcoal/90 backdrop-blur-md text-ivory/80 px-4 py-2.5 rounded-full border border-gold/20 flex items-center space-x-3 shadow-2xl text-xs tracking-widest uppercase">
-    <span class="inline-block w-2 h-2 rounded-full bg-terracotta animate-ping"></span>
-    <span class="font-medium">11:11 PAUSE</span>
+  <!-- ==================== RESPONSIVE 11:11 TICKER ==================== -->
+  <aside aria-label="11:11 Awareness Ticker" class="fixed bottom-4 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:bottom-6 sm:right-6 z-40 bg-charcoal/95 backdrop-blur-md text-ivory/80 px-4 py-2 rounded-full border border-gold/25 flex items-center space-x-2.5 shadow-2xl text-[11px] tracking-widest uppercase pointer-events-auto">
+    <span class="inline-block w-1.5 h-1.5 rounded-full bg-terracotta animate-ping"></span>
+    <span class="font-medium whitespace-nowrap">11:11 PAUSE</span>
     <span class="text-charcoal-muted">|</span>
-    <span id="live-time" class="font-mono text-gold-light">11:11:11</span>
-  </div>
+    <span id="live-time" class="font-mono text-gold-light tracking-normal">11:11:11</span>
+  </aside>
 
   <!-- ==================== NAVIGATION ==================== -->
-  <header class="fixed top-0 left-0 w-full z-50 bg-ivory/80 backdrop-blur-md border-b border-charcoal/5 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-6 md:px-12 h-24 flex items-center justify-between">
+  <header class="fixed top-0 left-0 w-full z-50 bg-ivory/90 backdrop-blur-md border-b border-charcoal/5">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-20 md:h-24 flex items-center justify-between">
       
       <!-- Brand & Emblem -->
-      <a href="#" class="flex items-center space-x-3 group">
-        <!-- SVG recreation of the sacred arch logo -->
-        <svg class="w-8 h-10 stroke-terracotta transition-transform duration-500 group-hover:scale-105" viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <a href="#" class="flex items-center space-x-2.5 sm:space-x-3 group">
+        <svg class="w-7 h-9 sm:w-8 sm:h-10 stroke-terracotta transition-transform duration-500 group-hover:scale-105" viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M10 120V50C10 25 30 10 50 10C70 10 90 25 90 50V120" stroke="currentColor" stroke-width="4"/>
           <circle cx="50" cy="20" r="12" stroke="currentColor" stroke-width="3"/>
           <line x1="50" y1="35" x2="50" y2="70" stroke="currentColor" stroke-width="3"/>
@@ -106,11 +127,11 @@
           <line x1="75" y1="45" x2="60" y2="65" stroke="currentColor" stroke-width="3"/>
           <path d="M50 70C35 85 30 105 50 120C70 105 65 85 50 70Z" stroke="currentColor" stroke-width="3"/>
         </svg>
-        <span class="font-serif text-2xl tracking-[0.25em] font-semibold text-charcoal">NIVARA</span>
+        <span class="font-serif text-xl sm:text-2xl tracking-[0.25em] font-semibold text-charcoal">NIVARA</span>
       </a>
 
       <!-- Desktop Nav Links -->
-      <nav class="hidden md:flex items-center space-x-10 text-xs uppercase tracking-[0.2em] font-medium text-charcoal-soft">
+      <nav class="hidden lg:flex items-center space-x-8 xl:space-x-10 text-xs uppercase tracking-[0.2em] font-medium text-charcoal-soft">
         <a href="#about" class="hover:text-terracotta transition-colors">About</a>
         <a href="#why" class="hover:text-terracotta transition-colors">Why Nivara</a>
         <a href="#services" class="hover:text-terracotta transition-colors">Services</a>
@@ -118,101 +139,112 @@
         <a href="#reviews" class="hover:text-terracotta transition-colors">Reviews</a>
       </nav>
 
-      <!-- CTA & Mobile Trigger -->
-      <div class="flex items-center space-x-6">
-        <a href="#experiences" class="hidden sm:inline-flex items-center text-xs uppercase tracking-[0.2em] px-6 py-3 border border-charcoal hover:border-terracotta hover:bg-terracotta hover:text-ivory transition-all duration-300">
+      <!-- CTA & Mobile Menu Trigger -->
+      <div class="flex items-center space-x-3 sm:space-x-6">
+        <a href="#experiences" class="hidden sm:inline-flex items-center text-xs uppercase tracking-[0.2em] px-5 py-2.5 md:px-6 md:py-3 border border-charcoal hover:border-terracotta hover:bg-terracotta hover:text-ivory transition-all duration-300">
           Begin <span class="ml-2 font-serif">→</span>
         </a>
-        <button id="menu-btn" aria-label="Toggle Menu" class="text-charcoal hover:text-terracotta transition-colors">
-          <i data-lucide="menu" class="w-6 h-6 stroke-1"></i>
+        <button id="menu-btn" aria-label="Toggle Mobile Navigation" class="p-2 -mr-2 text-charcoal hover:text-terracotta transition-colors focus:outline-none">
+          <i data-lucide="menu" class="w-6 h-6 stroke-[1.5]"></i>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Drawer -->
-  <div id="mobile-menu" class="fixed inset-0 bg-charcoal text-ivory z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-between p-12">
-    <div class="flex justify-between items-center">
+  <!-- Mobile Drawer Overlay -->
+  <div id="drawer-backdrop" class="fixed inset-0 bg-charcoal/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+  <!-- Mobile Drawer Menu -->
+  <aside id="mobile-menu" aria-label="Mobile Navigation" class="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-charcoal text-ivory z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-between p-8 sm:p-12 shadow-2xl overflow-y-auto">
+    <div class="flex justify-between items-center pb-8 border-b border-ivory/10">
       <span class="font-serif text-2xl tracking-[0.25em]">NIVARA</span>
-      <button id="close-menu" class="text-ivory/70 hover:text-ivory"><i data-lucide="x" class="w-8 h-8 stroke-1"></i></button>
+      <button id="close-menu" aria-label="Close menu" class="p-2 text-ivory/70 hover:text-ivory focus:outline-none">
+        <i data-lucide="x" class="w-6 h-6 stroke-[1.5]"></i>
+      </button>
     </div>
-    <div class="flex flex-col space-y-6 text-3xl font-serif">
-      <a href="#about" class="mobile-link hover:text-gold-light">About</a>
-      <a href="#why" class="mobile-link hover:text-gold-light">Why Nivara</a>
-      <a href="#services" class="mobile-link hover:text-gold-light">Services</a>
-      <a href="#experiences" class="mobile-link hover:text-gold-light">Experiences</a>
-      <a href="#reviews" class="mobile-link hover:text-gold-light">Reviews</a>
+
+    <div class="flex flex-col space-y-6 text-2xl sm:text-3xl font-serif my-8">
+      <a href="#about" class="mobile-link hover:text-gold-light transition-colors py-1">About</a>
+      <a href="#why" class="mobile-link hover:text-gold-light transition-colors py-1">Why Nivara</a>
+      <a href="#services" class="mobile-link hover:text-gold-light transition-colors py-1">Services</a>
+      <a href="#experiences" class="mobile-link hover:text-gold-light transition-colors py-1">Experiences</a>
+      <a href="#reviews" class="mobile-link hover:text-gold-light transition-colors py-1">Reviews</a>
     </div>
-    <div class="pt-6 border-t border-ivory/10 text-xs tracking-widest uppercase text-ivory/50">
-      Reflect • Align • Become
+
+    <div class="space-y-6 pt-6 border-t border-ivory/10">
+      <a href="#contact" class="mobile-link block w-full text-center py-3.5 bg-terracotta text-ivory text-xs uppercase tracking-[0.2em] font-medium hover:bg-terracotta-light transition-all">
+        Begin Journey
+      </a>
+      <p class="text-[10px] tracking-widest uppercase text-ivory/40 text-center">
+        Reflect • Align • Become
+      </p>
     </div>
-  </div>
+  </aside>
 
   <!-- ==================== HERO SECTION ==================== -->
-  <section class="min-h-screen pt-36 pb-24 px-6 md:px-12 flex flex-col justify-between relative overflow-hidden border-b border-charcoal/10">
-    <!-- Ambient gold circle watermark -->
-    <div class="absolute -top-24 right-[-10%] w-[550px] h-[550px] bg-terracotta/5 rounded-full blur-3xl pointer-events-none"></div>
+  <section class="min-h-[92vh] sm:min-h-screen pt-28 sm:pt-36 pb-16 px-5 sm:px-8 lg:px-12 flex flex-col justify-between relative overflow-hidden border-b border-charcoal/10">
+    <div class="absolute -top-24 right-[-15%] sm:right-[-5%] w-[320px] sm:w-[500px] h-[320px] sm:h-[500px] bg-terracotta/5 rounded-full blur-3xl pointer-events-none"></div>
 
-    <div class="max-w-6xl mx-auto w-full my-auto text-center md:text-left">
-      <div class="inline-flex items-center space-x-3 mb-8">
-        <span class="w-8 h-[1px] bg-terracotta"></span>
-        <span class="text-xs font-semibold tracking-[0.3em] uppercase text-terracotta">When you notice 11:11, pause.</span>
+    <div class="max-w-6xl mx-auto w-full my-auto text-left py-6">
+      <div class="inline-flex items-center space-x-2.5 sm:space-x-3 mb-6 sm:mb-8">
+        <span class="w-6 sm:w-8 h-[1px] bg-terracotta"></span>
+        <span class="text-[11px] sm:text-xs font-semibold tracking-[0.25em] uppercase text-terracotta">When you notice 11:11, pause.</span>
       </div>
 
-      <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[1.08] text-charcoal mb-8">
+      <h1 class="hero-title font-serif tracking-tight text-charcoal mb-6 sm:mb-8">
         Maybe it isn’t about the number.<br>
-        <span class="italic font-light text-terracotta">Maybe it’s about the moment</span><br>
+        <span class="italic font-light text-terracotta">Maybe it’s about the moment</span><br class="hidden sm:inline">
         you finally stop and listen to yourself.
       </h1>
 
-      <p class="max-w-2xl text-base md:text-lg text-charcoal-muted leading-relaxed font-light mb-12">
+      <p class="max-w-2xl text-sm sm:text-base md:text-lg text-charcoal-muted leading-relaxed font-light mb-8 sm:mb-12">
         NIVARA is a space for reflection, manifestation, perspective, and inner transformation. Not becoming someone else. <strong class="text-charcoal font-medium">Coming back to yourself.</strong>
       </p>
 
-      <div class="flex flex-col sm:flex-row items-center sm:items-stretch gap-5">
-        <a href="#experiences" class="w-full sm:w-auto text-center px-8 py-4 bg-terracotta text-ivory text-xs uppercase tracking-[0.25em] font-medium hover:bg-terracotta-dark transition-all duration-300 shadow-lg shadow-terracotta/20">
+      <div class="flex flex-col xs:flex-row items-stretch xs:items-center gap-4 sm:gap-5 max-w-md xs:max-w-none">
+        <a href="#experiences" class="text-center px-6 sm:px-8 py-3.5 sm:py-4 bg-terracotta text-ivory text-xs uppercase tracking-[0.25em] font-medium hover:bg-terracotta-dark transition-all duration-300 shadow-md">
           Begin Your Journey &nbsp;→
         </a>
-        <a href="#about" class="w-full sm:w-auto text-center px-8 py-4 border border-charcoal/20 text-charcoal text-xs uppercase tracking-[0.25em] hover:border-charcoal hover:bg-ivory-200 transition-all duration-300">
-          Explore The Philosophy
+        <a href="#about" class="text-center px-6 sm:px-8 py-3.5 sm:py-4 border border-charcoal/25 text-charcoal text-xs uppercase tracking-[0.25em] hover:border-charcoal hover:bg-ivory-200 transition-all duration-300">
+          Explore Philosophy
         </a>
       </div>
     </div>
 
-    <!-- Editorial bottom bar with recurring 11:11 -->
-    <div class="max-w-7xl mx-auto w-full pt-16 flex flex-col md:flex-row justify-between items-start md:items-end border-t border-charcoal/10 gap-6 text-charcoal-muted text-xs tracking-widest uppercase">
+    <!-- Editorial footer indicator -->
+    <div class="max-w-7xl mx-auto w-full pt-10 sm:pt-16 flex flex-col sm:flex-row justify-between items-start sm:items-end border-t border-charcoal/10 gap-3 text-charcoal-muted text-[11px] tracking-widest uppercase">
       <div>Since 2024 • Inner Architecture</div>
-      <div class="font-serif text-3xl text-charcoal/20 tracking-widest">11 : 11</div>
+      <div class="font-serif text-2xl sm:text-3xl text-charcoal/20 tracking-widest">11 : 11</div>
       <div>Editorial × Modern Wellness</div>
     </div>
   </section>
 
   <!-- ==================== 11:11 MANIFESTO SECTION ==================== -->
-  <section id="about" class="py-32 px-6 md:px-12 bg-ivory-200 border-b border-charcoal/10">
-    <div class="max-w-5xl mx-auto grid md:grid-cols-12 gap-12 items-center">
+  <section id="about" class="py-20 sm:py-32 px-5 sm:px-8 lg:px-12 bg-ivory-200 border-b border-charcoal/10">
+    <div class="max-w-5xl mx-auto grid md:grid-cols-12 gap-8 md:gap-12 items-center">
       
-      <div class="md:col-span-5 relative">
-        <div class="aspect-[3/4] bg-charcoal relative overflow-hidden shadow-2xl">
+      <div class="md:col-span-5">
+        <div class="aspect-[4/5] sm:aspect-[3/4] bg-charcoal relative overflow-hidden shadow-xl max-w-md mx-auto md:max-w-none">
           <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1200&auto=format&fit=crop" alt="Inner Stillness" class="object-cover w-full h-full opacity-80 mix-blend-luminosity hover:scale-105 transition-all duration-700">
-          <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent opacity-80"></div>
-          <div class="absolute bottom-8 left-8 right-8 text-ivory">
-            <span class="font-serif text-5xl font-light text-gold-light">11:11</span>
-            <p class="text-xs uppercase tracking-[0.2em] mt-2 text-ivory/70">A moment of conscious alignment</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent opacity-85"></div>
+          <div class="absolute bottom-6 left-6 right-6 text-ivory">
+            <span class="font-serif text-4xl sm:text-5xl font-light text-gold-light">11:11</span>
+            <p class="text-[10px] sm:text-xs uppercase tracking-[0.2em] mt-1 text-ivory/70">A moment of conscious alignment</p>
           </div>
         </div>
       </div>
 
-      <div class="md:col-span-7 space-y-8 md:pl-8">
-        <div class="text-xs font-semibold tracking-[0.3em] uppercase text-terracotta">A Moment Of Alignment</div>
-        <h2 class="font-serif text-4xl md:text-5xl leading-tight text-charcoal">
+      <div class="md:col-span-7 space-y-6 sm:space-y-8 md:pl-4 lg:pl-8">
+        <div class="text-xs font-semibold tracking-[0.25em] uppercase text-terracotta">A Moment Of Alignment</div>
+        <h2 class="section-title font-serif text-charcoal">
           Some people see 11:11 as a sign. At NIVARA, we see it as something deeper.
         </h2>
-        <div class="space-y-4 text-charcoal-muted text-base leading-relaxed font-light">
+        <div class="space-y-4 text-charcoal-muted text-sm sm:text-base leading-relaxed font-light">
           <p>A reminder to pause.</p>
           <p>To become conscious of your thoughts. Your energy. Your direction. Yourself.</p>
-          <p class="font-serif text-2xl text-charcoal italic pt-4">
+          <blockquote class="font-serif text-xl sm:text-2xl text-charcoal italic pt-2 sm:pt-4 border-l-2 border-terracotta pl-4">
             "Because transformation doesn’t always begin with a big moment. Sometimes, it begins when you finally pay attention."
-          </p>
+          </blockquote>
         </div>
       </div>
 
@@ -220,62 +252,62 @@
   </section>
 
   <!-- ==================== WHY NIVARA ==================== -->
-  <section id="why" class="py-32 px-6 md:px-12 bg-ivory border-b border-charcoal/10">
+  <section id="why" class="py-20 sm:py-32 px-5 sm:px-8 lg:px-12 bg-ivory border-b border-charcoal/10">
     <div class="max-w-7xl mx-auto">
       
-      <div class="grid lg:grid-cols-12 gap-16 mb-24 items-start">
-        <div class="lg:col-span-6 space-y-6">
-          <span class="text-xs font-semibold tracking-[0.3em] uppercase text-terracotta">Why Nivara</span>
-          <h2 class="font-serif text-4xl md:text-6xl text-charcoal leading-[1.15]">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-16 mb-16 sm:mb-24 items-start">
+        <div class="lg:col-span-6 space-y-4 sm:space-y-6">
+          <span class="text-xs font-semibold tracking-[0.25em] uppercase text-terracotta">Why Nivara</span>
+          <h2 class="section-title font-serif text-charcoal">
             Because your inner world creates the way you experience your outer world.
           </h2>
         </div>
-        <div class="lg:col-span-6 space-y-6 text-charcoal-muted text-base md:text-lg leading-relaxed font-light">
+        <div class="lg:col-span-6 space-y-4 sm:space-y-6 text-charcoal-muted text-sm sm:text-base md:text-lg leading-relaxed font-light">
           <p>NIVARA is not about selling unrealistic dreams. It’s about creating clarity. Understanding your patterns. Questioning the beliefs that hold you back.</p>
           <p>And learning how to approach life with greater awareness and intention.</p>
-          <div class="pt-4 flex items-center space-x-4">
-            <span class="text-xs uppercase tracking-[0.25em] font-semibold text-charcoal border-b border-terracotta pb-1">Real. Honest. Transformative.</span>
+          <div class="pt-2">
+            <span class="inline-block text-xs uppercase tracking-[0.25em] font-semibold text-charcoal border-b border-terracotta pb-1">Real. Honest. Transformative.</span>
           </div>
         </div>
       </div>
 
       <!-- Feature Grid -->
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         
-        <div class="p-8 border border-charcoal/10 bg-ivory-50 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
+        <div class="p-6 sm:p-8 border border-charcoal/10 bg-ivory-50 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
           <span class="text-terracotta text-lg">✦</span>
-          <h3 class="font-serif text-2xl text-charcoal mt-4 mb-2">Inner-Self Guidance</h3>
-          <p class="text-sm text-charcoal-muted font-light leading-relaxed">Dedicated focus on peeling back internal noise to listen to what is authentic to you.</p>
+          <h3 class="font-serif text-xl sm:text-2xl text-charcoal mt-4 mb-2">Inner-Self Guidance</h3>
+          <p class="text-xs sm:text-sm text-charcoal-muted font-light leading-relaxed">Dedicated focus on peeling back internal noise to listen to what is authentic to you.</p>
         </div>
 
-        <div class="p-8 border border-charcoal/10 bg-ivory-50 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
+        <div class="p-6 sm:p-8 border border-charcoal/10 bg-ivory-50 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
           <span class="text-terracotta text-lg">✦</span>
-          <h3 class="font-serif text-2xl text-charcoal mt-4 mb-2">Manifestation with Awareness</h3>
-          <p class="text-sm text-charcoal-muted font-light leading-relaxed">Grounded in reality, cognitive psychology, and intentional aligned action.</p>
+          <h3 class="font-serif text-xl sm:text-2xl text-charcoal mt-4 mb-2">Manifestation with Awareness</h3>
+          <p class="text-xs sm:text-sm text-charcoal-muted font-light leading-relaxed">Grounded in reality, cognitive psychology, and intentional aligned action.</p>
         </div>
 
-        <div class="p-8 border border-charcoal/10 bg-ivory-50 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
+        <div class="p-6 sm:p-8 border border-charcoal/10 bg-ivory-50 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
           <span class="text-terracotta text-lg">✦</span>
-          <h3 class="font-serif text-2xl text-charcoal mt-4 mb-2">Perspective Transformation</h3>
-          <p class="text-sm text-charcoal-muted font-light leading-relaxed">Rewiring foundational narratives that hold you back from living in alignment.</p>
+          <h3 class="font-serif text-xl sm:text-2xl text-charcoal mt-4 mb-2">Perspective Transformation</h3>
+          <p class="text-xs sm:text-sm text-charcoal-muted font-light leading-relaxed">Rewiring foundational narratives that hold you back from living in alignment.</p>
         </div>
 
-        <div class="p-8 border border-charcoal/10 bg-ivory-50 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
+        <div class="p-6 sm:p-8 border border-charcoal/10 bg-ivory-50 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
           <span class="text-terracotta text-lg">✦</span>
-          <h3 class="font-serif text-2xl text-charcoal mt-4 mb-2">Honest Conversations</h3>
-          <p class="text-sm text-charcoal-muted font-light leading-relaxed">No superficial toxic positivity. Real dialogues about obstacles and growth.</p>
+          <h3 class="font-serif text-xl sm:text-2xl text-charcoal mt-4 mb-2">Honest Conversations</h3>
+          <p class="text-xs sm:text-sm text-charcoal-muted font-light leading-relaxed">No superficial toxic positivity. Real dialogues about obstacles and growth.</p>
         </div>
 
-        <div class="p-8 border border-charcoal/10 bg-ivory-50 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
+        <div class="p-6 sm:p-8 border border-charcoal/10 bg-ivory-50 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
           <span class="text-terracotta text-lg">✦</span>
-          <h3 class="font-serif text-2xl text-charcoal mt-4 mb-2">Founder-Led Experiences</h3>
-          <p class="text-sm text-charcoal-muted font-light leading-relaxed">High-touch mentorship directly with Nisha Vasu for an intimate, personal touch.</p>
+          <h3 class="font-serif text-xl sm:text-2xl text-charcoal mt-4 mb-2">Founder-Led Experiences</h3>
+          <p class="text-xs sm:text-sm text-charcoal-muted font-light leading-relaxed">High-touch mentorship directly with Nisha Vasu for an intimate, personal touch.</p>
         </div>
 
-        <div class="p-8 border border-charcoal/10 bg-ivory-50 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
+        <div class="p-6 sm:p-8 border border-charcoal/10 bg-ivory-50 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
           <span class="text-terracotta text-lg">✦</span>
-          <h3 class="font-serif text-2xl text-charcoal mt-4 mb-2">Conscious Community</h3>
-          <p class="text-sm text-charcoal-muted font-light leading-relaxed">Surround yourself with individuals exploring their personal journeys with equal depth.</p>
+          <h3 class="font-serif text-xl sm:text-2xl text-charcoal mt-4 mb-2">Conscious Community</h3>
+          <p class="text-xs sm:text-sm text-charcoal-muted font-light leading-relaxed">Surround yourself with individuals exploring their personal journeys with equal depth.</p>
         </div>
 
       </div>
@@ -284,66 +316,65 @@
   </section>
 
   <!-- ==================== OUR SERVICES ==================== -->
-  <section id="services" class="py-32 px-6 md:px-12 bg-charcoal text-ivory">
+  <section id="services" class="py-20 sm:py-32 px-5 sm:px-8 lg:px-12 bg-charcoal text-ivory">
     <div class="max-w-7xl mx-auto">
       
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end pb-16 border-b border-ivory/10 gap-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end pb-12 sm:pb-16 border-b border-ivory/10 gap-4">
         <div>
-          <span class="text-xs font-semibold tracking-[0.3em] uppercase text-gold">Four Pillars of Evolution</span>
-          <h2 class="font-serif text-4xl md:text-6xl text-ivory mt-3">Our Services</h2>
+          <span class="text-xs font-semibold tracking-[0.25em] uppercase text-gold">Four Pillars of Evolution</span>
+          <h2 class="section-title font-serif text-ivory mt-2 sm:mt-3">Our Services</h2>
         </div>
-        <p class="text-sm uppercase tracking-widest text-ivory/60 max-w-sm">
+        <p class="text-xs sm:text-sm uppercase tracking-widest text-ivory/60 max-w-xs md:text-right">
           A structured continuum from intent to personal rebirth.
         </p>
       </div>
 
-      <!-- Editorial Horizontal List Layout -->
       <div class="divide-y divide-ivory/10">
         
         <!-- 01 -->
-        <div class="py-14 grid lg:grid-cols-12 gap-8 items-start group hover:bg-charcoal-soft/40 transition-colors px-4 -mx-4">
-          <div class="lg:col-span-2 font-mono text-xs tracking-widest text-gold">01 / PROCESS</div>
-          <div class="lg:col-span-4">
-            <h3 class="font-serif text-3xl md:text-4xl group-hover:text-gold-light transition-colors">MANIFEST</h3>
-            <span class="text-xs uppercase tracking-widest text-ivory/40 mt-1 block">Conscious Intent</span>
+        <div class="py-10 sm:py-14 grid md:grid-cols-12 gap-4 md:gap-8 items-start group hover:bg-charcoal-soft/40 transition-colors p-2 sm:p-4 rounded-sm">
+          <div class="md:col-span-2 font-mono text-xs tracking-widest text-gold">01 / PROCESS</div>
+          <div class="md:col-span-4">
+            <h3 class="font-serif text-2xl sm:text-3xl lg:text-4xl group-hover:text-gold-light transition-colors">MANIFEST</h3>
+            <span class="text-[11px] uppercase tracking-widest text-ivory/40 mt-1 block">Conscious Intent</span>
           </div>
-          <div class="lg:col-span-6 text-ivory/70 font-light leading-relaxed">
+          <div class="md:col-span-6 text-ivory/70 text-sm sm:text-base font-light leading-relaxed">
             Turn intention into conscious direction. Explore what you truly want and understand the mindset, beliefs, and actions behind creating meaningful change.
           </div>
         </div>
 
         <!-- 02 -->
-        <div class="py-14 grid lg:grid-cols-12 gap-8 items-start group hover:bg-charcoal-soft/40 transition-colors px-4 -mx-4">
-          <div class="lg:col-span-2 font-mono text-xs tracking-widest text-gold">02 / PROCESS</div>
-          <div class="lg:col-span-4">
-            <h3 class="font-serif text-3xl md:text-4xl group-hover:text-gold-light transition-colors">REFLECT</h3>
-            <span class="text-xs uppercase tracking-widest text-ivory/40 mt-1 block">Emotional Inquiry</span>
+        <div class="py-10 sm:py-14 grid md:grid-cols-12 gap-4 md:gap-8 items-start group hover:bg-charcoal-soft/40 transition-colors p-2 sm:p-4 rounded-sm">
+          <div class="md:col-span-2 font-mono text-xs tracking-widest text-gold">02 / PROCESS</div>
+          <div class="md:col-span-4">
+            <h3 class="font-serif text-2xl sm:text-3xl lg:text-4xl group-hover:text-gold-light transition-colors">REFLECT</h3>
+            <span class="text-[11px] uppercase tracking-widest text-ivory/40 mt-1 block">Emotional Inquiry</span>
           </div>
-          <div class="lg:col-span-6 text-ivory/70 font-light leading-relaxed">
+          <div class="md:col-span-6 text-ivory/70 text-sm sm:text-base font-light leading-relaxed">
             Understand what is happening within. Explore your thoughts, emotional patterns, perspectives, and the things that may be silently shaping your life.
           </div>
         </div>
 
         <!-- 03 -->
-        <div class="py-14 grid lg:grid-cols-12 gap-8 items-start group hover:bg-charcoal-soft/40 transition-colors px-4 -mx-4">
-          <div class="lg:col-span-2 font-mono text-xs tracking-widest text-gold">03 / PROCESS</div>
-          <div class="lg:col-span-4">
-            <h3 class="font-serif text-3xl md:text-4xl group-hover:text-gold-light transition-colors">ALIGN</h3>
-            <span class="text-xs uppercase tracking-widest text-ivory/40 mt-1 block">Synchronous Harmony</span>
+        <div class="py-10 sm:py-14 grid md:grid-cols-12 gap-4 md:gap-8 items-start group hover:bg-charcoal-soft/40 transition-colors p-2 sm:p-4 rounded-sm">
+          <div class="md:col-span-2 font-mono text-xs tracking-widest text-gold">03 / PROCESS</div>
+          <div class="md:col-span-4">
+            <h3 class="font-serif text-2xl sm:text-3xl lg:text-4xl group-hover:text-gold-light transition-colors">ALIGN</h3>
+            <span class="text-[11px] uppercase tracking-widest text-ivory/40 mt-1 block">Synchronous Harmony</span>
           </div>
-          <div class="lg:col-span-6 text-ivory/70 font-light leading-relaxed">
+          <div class="md:col-span-6 text-ivory/70 text-sm sm:text-base font-light leading-relaxed">
             Create alignment between who you are, what you believe, and where you want to go. Bridging everyday action with long-term purpose.
           </div>
         </div>
 
         <!-- 04 -->
-        <div class="py-14 grid lg:grid-cols-12 gap-8 items-start group hover:bg-charcoal-soft/40 transition-colors px-4 -mx-4">
-          <div class="lg:col-span-2 font-mono text-xs tracking-widest text-gold">04 / PROCESS</div>
-          <div class="lg:col-span-4">
-            <h3 class="font-serif text-3xl md:text-4xl group-hover:text-gold-light transition-colors">BECOME</h3>
-            <span class="text-xs uppercase tracking-widest text-ivory/40 mt-1 block">Self Realization</span>
+        <div class="py-10 sm:py-14 grid md:grid-cols-12 gap-4 md:gap-8 items-start group hover:bg-charcoal-soft/40 transition-colors p-2 sm:p-4 rounded-sm">
+          <div class="md:col-span-2 font-mono text-xs tracking-widest text-gold">04 / PROCESS</div>
+          <div class="md:col-span-4">
+            <h3 class="font-serif text-2xl sm:text-3xl lg:text-4xl group-hover:text-gold-light transition-colors">BECOME</h3>
+            <span class="text-[11px] uppercase tracking-widest text-ivory/40 mt-1 block">Self Realization</span>
           </div>
-          <div class="lg:col-span-6 text-ivory/70 font-light leading-relaxed">
+          <div class="md:col-span-6 text-ivory/70 text-sm sm:text-base font-light leading-relaxed">
             Transformation isn’t about becoming perfect. It’s about becoming more conscious. More clear. More you.
           </div>
         </div>
@@ -353,28 +384,28 @@
     </div>
   </section>
 
-  <!-- ==================== THE NIVARA EXPERIENCES (TIERS) ==================== -->
-  <section id="experiences" class="py-32 px-6 md:px-12 bg-ivory">
+  <!-- ==================== THE NIVARA EXPERIENCES ==================== -->
+  <section id="experiences" class="py-20 sm:py-32 px-5 sm:px-8 lg:px-12 bg-ivory">
     <div class="max-w-7xl mx-auto">
       
-      <div class="text-center max-w-2xl mx-auto mb-20">
-        <span class="text-xs font-semibold tracking-[0.3em] uppercase text-terracotta">Curated Paths</span>
-        <h2 class="font-serif text-4xl md:text-6xl text-charcoal mt-3">The Nivara Experience</h2>
-        <p class="text-charcoal-muted mt-4 font-light">Choose the depth of immersion aligned with your present chapter.</p>
+      <div class="text-center max-w-2xl mx-auto mb-14 sm:mb-20">
+        <span class="text-xs font-semibold tracking-[0.25em] uppercase text-terracotta">Curated Paths</span>
+        <h2 class="section-title font-serif text-charcoal mt-2 sm:mt-3">The Nivara Experience</h2>
+        <p class="text-charcoal-muted mt-3 font-light text-sm sm:text-base">Choose the depth of immersion aligned with your present chapter.</p>
       </div>
 
-      <div class="grid lg:grid-cols-3 gap-8 items-stretch">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
         
         <!-- Experience 01 -->
-        <div class="p-10 border border-charcoal/10 bg-ivory-50 flex flex-col justify-between hover:border-charcoal/30 transition-all">
+        <div class="p-6 sm:p-10 border border-charcoal/10 bg-ivory-50 flex flex-col justify-between hover:border-charcoal/30 transition-all">
           <div>
-            <div class="text-xs tracking-widest uppercase text-terracotta font-mono mb-6">01 — TIER</div>
-            <h3 class="font-serif text-3xl text-charcoal mb-4">THE BEGINNING</h3>
-            <p class="text-charcoal-muted font-light text-sm leading-relaxed mb-8">
+            <div class="text-xs tracking-widest uppercase text-terracotta font-mono mb-4 sm:mb-6">01 — TIER</div>
+            <h3 class="font-serif text-2xl sm:text-3xl text-charcoal mb-3 sm:mb-4">THE BEGINNING</h3>
+            <p class="text-charcoal-muted font-light text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8">
               For those ready to pause and start understanding themselves. A starting point for clarity, reflection, and conscious manifestation.
             </p>
           </div>
-          <div class="pt-8 border-t border-charcoal/10">
+          <div class="pt-6 border-t border-charcoal/10">
             <a href="#contact" class="inline-flex items-center text-xs uppercase tracking-[0.2em] text-charcoal font-medium hover:text-terracotta transition-colors">
               Explore <span>&nbsp;→</span>
             </a>
@@ -382,15 +413,15 @@
         </div>
 
         <!-- Experience 02 -->
-        <div class="p-10 border border-charcoal/10 bg-ivory-50 flex flex-col justify-between hover:border-charcoal/30 transition-all">
+        <div class="p-6 sm:p-10 border border-charcoal/10 bg-ivory-50 flex flex-col justify-between hover:border-charcoal/30 transition-all">
           <div>
-            <div class="text-xs tracking-widest uppercase text-terracotta font-mono mb-6">02 — TIER</div>
-            <h3 class="font-serif text-3xl text-charcoal mb-4">THE ALIGNMENT</h3>
-            <p class="text-charcoal-muted font-light text-sm leading-relaxed mb-8">
+            <div class="text-xs tracking-widest uppercase text-terracotta font-mono mb-4 sm:mb-6">02 — TIER</div>
+            <h3 class="font-serif text-2xl sm:text-3xl text-charcoal mb-3 sm:mb-4">THE ALIGNMENT</h3>
+            <p class="text-charcoal-muted font-light text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8">
               For those ready to go deeper. A structured journey into mindset, perspective, inner patterns, and personal transformation.
             </p>
           </div>
-          <div class="pt-8 border-t border-charcoal/10">
+          <div class="pt-6 border-t border-charcoal/10">
             <a href="#contact" class="inline-flex items-center text-xs uppercase tracking-[0.2em] text-charcoal font-medium hover:text-terracotta transition-colors">
               Explore <span>&nbsp;→</span>
             </a>
@@ -398,25 +429,25 @@
         </div>
 
         <!-- Experience 03 (Hero Tier) -->
-        <div class="p-10 border-2 border-terracotta bg-ivory-200 flex flex-col justify-between relative shadow-xl">
-          <div class="absolute -top-3 right-8 bg-terracotta text-ivory text-[10px] tracking-[0.25em] uppercase px-3 py-1 font-medium">
+        <div class="p-6 sm:p-10 border-2 border-terracotta bg-ivory-200 flex flex-col justify-between relative shadow-xl md:col-span-2 lg:col-span-1">
+          <div class="absolute -top-3 right-6 bg-terracotta text-ivory text-[10px] tracking-[0.2em] uppercase px-3 py-1 font-medium">
             Premium Experience
           </div>
           <div>
-            <div class="text-xs tracking-widest uppercase text-terracotta font-mono mb-6">03 — TIER</div>
-            <h3 class="font-serif text-3xl text-charcoal mb-4">THE INNER CIRCLE</h3>
-            <p class="text-charcoal-muted font-light text-sm leading-relaxed mb-6">
+            <div class="text-xs tracking-widest uppercase text-terracotta font-mono mb-4 sm:mb-6">03 — TIER</div>
+            <h3 class="font-serif text-2xl sm:text-3xl text-charcoal mb-3 sm:mb-4">THE INNER CIRCLE</h3>
+            <p class="text-charcoal-muted font-light text-xs sm:text-sm leading-relaxed mb-6">
               A deeper founder-led journey designed for those looking for a more personal and immersive experience.
             </p>
-            <div class="space-y-3 pt-2 pb-8 text-xs uppercase tracking-wider text-charcoal">
+            <div class="space-y-2.5 pt-2 pb-6 sm:pb-8 text-[11px] sm:text-xs uppercase tracking-wider text-charcoal">
               <div class="flex items-center space-x-2"><span class="text-terracotta">✦</span> <span>Premium guidance</span></div>
               <div class="flex items-center space-x-2"><span class="text-terracotta">✦</span> <span>Founder-led sessions</span></div>
-              <div class="flex items-center space-x-2"><span class="text-terracotta">✦</span> <span>Personalized transformation journey</span></div>
+              <div class="flex items-center space-x-2"><span class="text-terracotta">✦</span> <span>Personalized transformation</span></div>
               <div class="flex items-center space-x-2"><span class="text-terracotta">✦</span> <span>Exclusive community access</span></div>
               <div class="flex items-center space-x-2"><span class="text-terracotta">✦</span> <span>Priority experiences</span></div>
             </div>
           </div>
-          <div class="pt-8 border-t border-charcoal/20">
+          <div class="pt-6 border-t border-charcoal/20">
             <a href="#contact" class="block text-center py-3.5 bg-charcoal text-ivory text-xs uppercase tracking-[0.2em] hover:bg-terracotta transition-colors">
               Apply For The Inner Circle →
             </a>
@@ -429,31 +460,31 @@
   </section>
 
   <!-- ==================== MEET THE FOUNDER ==================== -->
-  <section class="py-32 px-6 md:px-12 bg-ivory-200 border-y border-charcoal/10">
-    <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center">
+  <section class="py-20 sm:py-32 px-5 sm:px-8 lg:px-12 bg-ivory-200 border-y border-charcoal/10">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-10 md:gap-16 items-center">
       
-      <div class="lg:col-span-5 relative order-2 lg:order-1">
-        <div class="aspect-[4/5] bg-charcoal/10 relative overflow-hidden">
+      <div class="md:col-span-5 relative order-2 md:order-1 max-w-sm mx-auto md:max-w-none w-full">
+        <div class="aspect-[4/5] bg-charcoal/10 relative overflow-hidden shadow-lg">
           <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop" alt="Nisha Vasu Founder" class="object-cover w-full h-full grayscale contrast-125 hover:scale-105 transition-transform duration-700">
           <div class="absolute inset-0 bg-terracotta/10 mix-blend-multiply"></div>
         </div>
-        <div class="absolute -bottom-6 -right-6 bg-ivory p-6 border border-charcoal/10 shadow-lg hidden sm:block">
-          <span class="block font-serif text-lg text-charcoal">Nisha Vasu</span>
-          <span class="text-[10px] tracking-widest uppercase text-terracotta">Founder & Guide</span>
+        <div class="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 bg-ivory p-4 sm:p-6 border border-charcoal/10 shadow-lg">
+          <span class="block font-serif text-base sm:text-lg text-charcoal font-semibold">Nisha Vasu</span>
+          <span class="text-[9px] sm:text-[10px] tracking-widest uppercase text-terracotta">Founder & Guide</span>
         </div>
       </div>
 
-      <div class="lg:col-span-7 space-y-8 order-1 lg:order-2">
-        <span class="text-xs font-semibold tracking-[0.3em] uppercase text-terracotta">Meet The Founder</span>
-        <h2 class="font-serif text-4xl md:text-6xl text-charcoal leading-tight">
+      <div class="md:col-span-7 space-y-6 sm:space-y-8 order-1 md:order-2">
+        <span class="text-xs font-semibold tracking-[0.25em] uppercase text-terracotta">Meet The Founder</span>
+        <h2 class="section-title font-serif text-charcoal">
           A journey becomes more powerful when it feels human.
         </h2>
-        <div class="space-y-5 text-charcoal-muted font-light leading-relaxed text-base md:text-lg">
+        <div class="space-y-4 sm:space-y-5 text-charcoal-muted font-light leading-relaxed text-sm sm:text-base md:text-lg">
           <p>NIVARA is founder-led because transformation is personal. This isn't about automated advice or generic motivation.</p>
           <p>It’s about conversations. Experiences. Perspective. And creating a space where people can honestly explore who they are and where they want to go.</p>
-          <p class="font-serif text-xl text-charcoal italic pt-2">
+          <blockquote class="font-serif text-lg sm:text-xl text-charcoal italic pt-2 border-l-2 border-terracotta pl-4">
             "A person behind the purpose. A voice behind the journey."
-          </p>
+          </blockquote>
         </div>
       </div>
 
@@ -461,42 +492,42 @@
   </section>
 
   <!-- ==================== TESTIMONIALS / REVIEWS ==================== -->
-  <section id="reviews" class="py-32 px-6 md:px-12 bg-ivory">
+  <section id="reviews" class="py-20 sm:py-32 px-5 sm:px-8 lg:px-12 bg-ivory">
     <div class="max-w-7xl mx-auto">
       
-      <div class="text-center max-w-xl mx-auto mb-20">
-        <span class="text-xs font-semibold tracking-[0.3em] uppercase text-terracotta">Reflections</span>
-        <h2 class="font-serif text-4xl md:text-5xl text-charcoal mt-3">What People Feel</h2>
+      <div class="text-center max-w-xl mx-auto mb-14 sm:mb-20">
+        <span class="text-xs font-semibold tracking-[0.25em] uppercase text-terracotta">Reflections</span>
+        <h2 class="section-title font-serif text-charcoal mt-2">What People Feel</h2>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-12">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         
-        <div class="p-8 bg-ivory-50 border border-charcoal/10 flex flex-col justify-between relative">
-          <span class="font-serif text-6xl text-terracotta/20 absolute top-4 right-6">“</span>
-          <p class="font-serif text-2xl text-charcoal leading-snug mb-8 relative z-10">
+        <div class="p-6 sm:p-8 bg-ivory-50 border border-charcoal/10 flex flex-col justify-between relative">
+          <span class="font-serif text-5xl text-terracotta/20 absolute top-3 right-5">“</span>
+          <p class="font-serif text-xl sm:text-2xl text-charcoal leading-snug mb-6 relative z-10">
             «“I didn't just get clarity about what I wanted. I started understanding why I wanted it.”»
           </p>
-          <div class="text-xs tracking-widest uppercase text-charcoal-muted font-mono border-t border-charcoal/10 pt-4">
+          <div class="text-[11px] tracking-widest uppercase text-charcoal-muted font-mono border-t border-charcoal/10 pt-4">
             — NIVARA MEMBER
           </div>
         </div>
 
-        <div class="p-8 bg-ivory-50 border border-charcoal/10 flex flex-col justify-between relative">
-          <span class="font-serif text-6xl text-terracotta/20 absolute top-4 right-6">“</span>
-          <p class="font-serif text-2xl text-charcoal leading-snug mb-8 relative z-10">
+        <div class="p-6 sm:p-8 bg-ivory-50 border border-charcoal/10 flex flex-col justify-between relative">
+          <span class="font-serif text-5xl text-terracotta/20 absolute top-3 right-5">“</span>
+          <p class="font-serif text-xl sm:text-2xl text-charcoal leading-snug mb-6 relative z-10">
             «“The biggest transformation was the way I started looking at myself.”»
           </p>
-          <div class="text-xs tracking-widest uppercase text-charcoal-muted font-mono border-t border-charcoal/10 pt-4">
+          <div class="text-[11px] tracking-widest uppercase text-charcoal-muted font-mono border-t border-charcoal/10 pt-4">
             — NIVARA MEMBER
           </div>
         </div>
 
-        <div class="p-8 bg-ivory-50 border border-charcoal/10 flex flex-col justify-between relative">
-          <span class="font-serif text-6xl text-terracotta/20 absolute top-4 right-6">“</span>
-          <p class="font-serif text-2xl text-charcoal leading-snug mb-8 relative z-10">
+        <div class="p-6 sm:p-8 bg-ivory-50 border border-charcoal/10 flex flex-col justify-between relative md:col-span-2 lg:col-span-1">
+          <span class="font-serif text-5xl text-terracotta/20 absolute top-3 right-5">“</span>
+          <p class="font-serif text-xl sm:text-2xl text-charcoal leading-snug mb-6 relative z-10">
             «“Honest conversations. No unrealistic promises. Just a completely different perspective.”»
           </p>
-          <div class="text-xs tracking-widest uppercase text-charcoal-muted font-mono border-t border-charcoal/10 pt-4">
+          <div class="text-[11px] tracking-widest uppercase text-charcoal-muted font-mono border-t border-charcoal/10 pt-4">
             — NIVARA MEMBER
           </div>
         </div>
@@ -506,34 +537,33 @@
     </div>
   </section>
 
-  <!-- ==================== FINAL CLOSING REMINDER ==================== -->
-  <section id="contact" class="py-36 px-6 md:px-12 bg-charcoal text-ivory text-center relative overflow-hidden">
-    <!-- Center ambient terracotta burst -->
+  <!-- ==================== FINAL CLOSING SECTION ==================== -->
+  <section id="contact" class="py-24 sm:py-36 px-5 sm:px-8 lg:px-12 bg-charcoal text-ivory text-center relative overflow-hidden">
     <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-      <div class="w-[600px] h-[600px] rounded-full bg-terracotta blur-3xl"></div>
+      <div class="w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] rounded-full bg-terracotta blur-3xl"></div>
     </div>
 
-    <div class="max-w-4xl mx-auto relative z-10 space-y-8">
-      <div class="font-serif text-7xl md:text-9xl text-gold-light tracking-widest select-none">
+    <div class="max-w-4xl mx-auto relative z-10 space-y-6 sm:space-y-8">
+      <div class="large-display-number font-serif text-gold-light tracking-widest select-none leading-none">
         11:11
       </div>
       
-      <h2 class="font-serif text-3xl md:text-5xl font-light text-ivory">
+      <h2 class="font-serif text-2xl sm:text-4xl md:text-5xl font-light text-ivory">
         11:11 Again. You noticed it.
       </h2>
 
-      <p class="text-lg md:text-xl text-ivory/70 max-w-xl mx-auto font-light leading-relaxed">
+      <p class="text-base sm:text-lg md:text-xl text-ivory/70 max-w-xl mx-auto font-light leading-relaxed">
         So maybe this is your reminder.<br>
         Not to wish for a different life.<br>
         <span class="text-ivory font-medium">But to become conscious enough to create one.</span>
       </p>
 
-      <div class="pt-6">
-        <p class="text-xs tracking-[0.3em] uppercase text-gold mb-8">
+      <div class="pt-4 sm:pt-6">
+        <p class="text-[11px] sm:text-xs tracking-[0.25em] uppercase text-gold mb-6 sm:mb-8">
           YOUR NEXT CHAPTER CAN START WITH A PAUSE.
         </p>
 
-        <a href="mailto:connect@nivara.com" class="inline-flex items-center px-10 py-5 bg-terracotta hover:bg-terracotta-light text-ivory text-xs uppercase tracking-[0.25em] font-medium transition-all duration-300 shadow-2xl shadow-terracotta/30">
+        <a href="mailto:connect@nivara.com" class="inline-flex items-center px-8 sm:px-10 py-4 sm:py-5 bg-terracotta hover:bg-terracotta-light text-ivory text-xs uppercase tracking-[0.25em] font-medium transition-all duration-300 shadow-2xl">
           Begin Your Journey &nbsp;→
         </a>
       </div>
@@ -541,23 +571,23 @@
   </section>
 
   <!-- ==================== FOOTER ==================== -->
-  <footer class="bg-charcoal border-t border-ivory/10 text-ivory py-16 px-6 md:px-12">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+  <footer class="bg-charcoal border-t border-ivory/10 text-ivory py-12 sm:py-16 px-5 sm:px-8 lg:px-12">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8 text-center md:text-left">
       
-      <div class="flex items-center space-x-3">
-        <span class="font-serif text-2xl tracking-[0.25em] font-semibold">NIVARA</span>
-        <span class="text-ivory/40">•</span>
-        <span class="text-xs uppercase tracking-widest text-ivory/60">Reflect. Align. Become.</span>
+      <div class="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3">
+        <span class="font-serif text-xl sm:text-2xl tracking-[0.25em] font-semibold">NIVARA</span>
+        <span class="hidden sm:inline text-ivory/40">•</span>
+        <span class="text-[11px] uppercase tracking-widest text-ivory/60">Reflect. Align. Become.</span>
       </div>
 
-      <div class="flex space-x-8 text-xs tracking-widest uppercase text-ivory/60">
+      <div class="flex flex-wrap justify-center gap-6 text-[11px] tracking-widest uppercase text-ivory/60">
         <a href="#about" class="hover:text-gold transition-colors">About</a>
         <a href="#services" class="hover:text-gold transition-colors">Services</a>
         <a href="#experiences" class="hover:text-gold transition-colors">Experiences</a>
         <a href="#reviews" class="hover:text-gold transition-colors">Reviews</a>
       </div>
 
-      <div class="text-xs tracking-widest uppercase text-ivory/40">
+      <div class="text-[10px] sm:text-[11px] tracking-widest uppercase text-ivory/40">
         © 2024 NIVARA. All Rights Reserved.
       </div>
     </div>
@@ -565,30 +595,42 @@
 
   <!-- ==================== LOGIC / SCRIPTS ==================== -->
   <script>
-    // Initialize Lucide Icons
     lucide.createIcons();
 
-    // Mobile menu toggle
+    // Mobile Navigation Controls
     const menuBtn = document.getElementById('menu-btn');
     const closeBtn = document.getElementById('close-menu');
     const mobileMenu = document.getElementById('mobile-menu');
+    const drawerBackdrop = document.getElementById('drawer-backdrop');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    function toggleMenu() {
-      mobileMenu.classList.toggle('translate-x-full');
+    function openMenu() {
+      mobileMenu.classList.remove('translate-x-full');
+      drawerBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+      document.body.classList.add('overflow-hidden');
     }
 
-    menuBtn.addEventListener('click', toggleMenu);
-    closeBtn.addEventListener('click', toggleMenu);
-    mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+    function closeMenu() {
+      mobileMenu.classList.add('translate-x-full');
+      drawerBackdrop.classList.add('opacity-0', 'pointer-events-none');
+      document.body.classList.remove('overflow-hidden');
+    }
 
-    // Live 11:11 counter simulation
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    drawerBackdrop.addEventListener('click', closeMenu);
+    mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+    // Live Clock Simulation
     function updateClock() {
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, '0');
       const mins = String(now.getMinutes()).padStart(2, '0');
       const secs = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('live-time').innerText = `${hours}:${mins}:${secs}`;
+      const timeElem = document.getElementById('live-time');
+      if (timeElem) {
+        timeElem.innerText = `${hours}:${mins}:${secs}`;
+      }
     }
     setInterval(updateClock, 1000);
     updateClock();
